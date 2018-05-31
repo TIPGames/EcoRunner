@@ -5,11 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour 
 {
 	[SerializeField]
-	private float _jumpSpeed = 4;
-	[SerializeField]
 	private float _groundHeight = 1;
 	[SerializeField]
-	private float _roofHeight = 4;
+	private float _jumpSpeed = 4;
 	[SerializeField]
 	private float _gravity = 1;
 	[SerializeField]
@@ -17,7 +15,6 @@ public class Player : MonoBehaviour
 
 	private float mCurrYVelocity;
 	private int mJumpCount = 0;
-	private bool mIsJumping = false;
 
 	// Use this for initialization
 	void Start () 
@@ -30,7 +27,6 @@ public class Player : MonoBehaviour
 	{
 		if(Input.GetMouseButtonDown(0) && mJumpCount < _maxJumps)
 		{
-			mIsJumping = true;
 			mCurrYVelocity = _jumpSpeed;
 			mJumpCount++;
 		}
@@ -46,11 +42,6 @@ public class Player : MonoBehaviour
 			pos.y = _groundHeight;
 			mCurrYVelocity = 0;
 			mJumpCount = 0;
-		}
-		if(pos.y >= _roofHeight)
-		{
-			pos.y = _roofHeight;
-			mCurrYVelocity = 0;
 		}
 		transform.position = pos;
 		mCurrYVelocity -= _gravity * _gravity * Time.deltaTime;

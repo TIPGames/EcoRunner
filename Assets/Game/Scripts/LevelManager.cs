@@ -38,8 +38,8 @@ public class LevelManager : MonoBehaviour
 				Vector3 pos = mActiveElements[i].position;
 				pos.x -= speed * Time.deltaTime * _layerSpeedMultiplier;
 				if((i == mActiveElements.Count - 1)
-				   && (pos.x < 0 && pos.x >= -epsilon))
-					GetNextElement(-screenLimit);
+				   && (mActiveElements[i].position.x >= 0 && pos.x <= 0)) //(pos.x < 0 && pos.x >= -epsilon))
+					GetNextElement(-(mActiveElements[i].position.x + screenLimit));
 				mActiveElements[i].position = pos;
 			}
 			for(int i = mActiveElements.Count - 1; i >= 0; --i)

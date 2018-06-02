@@ -25,9 +25,16 @@ namespace com.tip.games.ecorunner
 		private int mJumpCount = 0;
 		private int mCurrentLives = 0;
 		private int mCollectablesPicked = 0;
+		private int mCollectablesScore = 0;
+		private float mScoreMultiplier = 1;
 		private bool mIsGameOn = false;
 	
 		public int pLives { get { return mCurrentLives; } }
+		public float pScoreMultiplier 
+		{
+			get { return mScoreMultiplier; }
+			set { mScoreMultiplier = value; }
+		}
 		// Use this for initialization
 		void Start () 
 		{
@@ -53,6 +60,7 @@ namespace com.tip.games.ecorunner
 			mCurrentLives = _lives;
 			mCurrYVelocity = 0;
 			mCollectablesPicked = 0;
+			mCollectablesScore = 0;
 			_gameUi.SetLives(pLives);
 			_gameUi.SetScore(mCollectablesPicked);
 			_levelManager.Reset();
@@ -77,9 +85,16 @@ namespace com.tip.games.ecorunner
 		public void OnCollected(Collectable collectable)
 		{
 			mCollectablesPicked++;
-			_gameUi.SetScore(mCollectablesPicked);
+			mCollectablesScore += (int)(collectable.pScore * pScoreMultiplier);
+			_gameUi.SetScore(mCollectablesScore);
 			BlinkObject blink = collectable.GetComponent<BlinkObject>();
 			blink.StartBlink(true);
+		}
+
+		public void ActivatePowerup<T>() where T: PowerupBase
+		{
+			T powerUp = GetComponent<T>();
+			powerUp.Activate();
 		}
 
 		private IEnumerator DelayedResume(float timeDelay)

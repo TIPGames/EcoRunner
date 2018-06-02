@@ -21,7 +21,6 @@ namespace com.tip.games.ecorunner
 
 		public void OnTriggerEnter2D(Collider2D c)
 		{
-			Debug.Log(c.tag);
 			Player player = c.GetComponent<Player>();
 			player.OnObstacleHit(this);
 		}

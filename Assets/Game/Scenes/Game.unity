@@ -213,6 +213,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f6b4b2e95e182a459e6bcb8c88eb074, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &87630105 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1666398790562192, guid: 96063f2ea939aa34fa2aec8c7cd0bbb8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1930425331}
+--- !u!114 &87630107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87630105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c6bceec8cc7f240889f3ac452cecf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floatDistance: 0.5
+  _floatSpeed: 2
 --- !u!1 &161612646
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +312,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &200565702 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1557643018936978, guid: 96063f2ea939aa34fa2aec8c7cd0bbb8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1930425331}
+--- !u!114 &200565704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 200565702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c6bceec8cc7f240889f3ac452cecf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floatDistance: 0.5
+  _floatSpeed: 2
 --- !u!114 &425897307 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114455456578723364, guid: 96063f2ea939aa34fa2aec8c7cd0bbb8,
@@ -314,6 +350,8 @@ GameObject:
   - component: {fileID: 1159489877}
   - component: {fileID: 1159489876}
   - component: {fileID: 1159489878}
+  - component: {fileID: 1159489880}
+  - component: {fileID: 1159489879}
   m_Layer: 8
   m_Name: PlayerBoy
   m_TagString: Player
@@ -471,6 +509,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blinkDuration: 1
   _blinkPeriod: 0.1
+--- !u!114 &1159489879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159489871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38068649073f182419e20ccc3f1a0f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1159489880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159489871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e40d94c52dfc264b804a830965fd2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1184170638
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +607,8 @@ GameObject:
   - component: {fileID: 1488692831}
   - component: {fileID: 1488692830}
   - component: {fileID: 1488692832}
+  - component: {fileID: 1488692834}
+  - component: {fileID: 1488692833}
   m_Layer: 8
   m_Name: PlayerGirl
   m_TagString: Player
@@ -704,6 +766,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blinkDuration: 1
   _blinkPeriod: 0.1
+--- !u!114 &1488692833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1488692825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38068649073f182419e20ccc3f1a0f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1488692834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1488692825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e40d94c52dfc264b804a830965fd2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1505708539 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1973701764024312, guid: 96063f2ea939aa34fa2aec8c7cd0bbb8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1930425331}
+--- !u!114 &1505708541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1505708539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c6bceec8cc7f240889f3ac452cecf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floatDistance: 0.5
+  _floatSpeed: 2
 --- !u!114 &1592812148 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114103856067723324, guid: 7f6b4b2e95e182a459e6bcb8c88eb074,

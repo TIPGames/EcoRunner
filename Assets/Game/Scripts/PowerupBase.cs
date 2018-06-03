@@ -8,6 +8,8 @@ namespace com.tip.games.ecorunner
 	{
 		[SerializeField]
 		private float _activeTime = 5;
+		[SerializeField]
+		private ParticleSystem _effect;
 
 		protected Player mPlayer;
 		protected bool mIsActive = false;
@@ -27,12 +29,16 @@ namespace com.tip.games.ecorunner
 		public virtual void Activate()
 		{
 			mIsActive = true;
+			if(_effect != null)
+				_effect.Play();
 			mActivatedTime = Time.realtimeSinceStartup;
 		}
 
 		public virtual void Deactivate()
 		{
-			
+			mIsActive = false;
+			if(_effect != null)
+				_effect.Stop();
 		}
 	}
 }

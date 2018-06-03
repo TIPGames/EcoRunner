@@ -63,6 +63,7 @@ namespace com.tip.games.ecorunner
 			mCollectablesScore = 0;
 			_gameUi.SetLives(pLives);
 			_gameUi.SetScore(mCollectablesPicked);
+			DeactivatePowerUps();
 			_levelManager.Reset();
 			_levelManager.ResumeRunning();
 		}
@@ -87,14 +88,19 @@ namespace com.tip.games.ecorunner
 			mCollectablesPicked++;
 			mCollectablesScore += (int)(collectable.pScore * pScoreMultiplier);
 			_gameUi.SetScore(mCollectablesScore);
-			BlinkObject blink = collectable.GetComponent<BlinkObject>();
-			blink.StartBlink(true);
 		}
 
 		public void ActivatePowerup<T>() where T: PowerupBase
 		{
 			T powerUp = GetComponent<T>();
 			powerUp.Activate();
+		}
+
+		public void DeactivatePowerUps()
+		{
+			PowerupBase[] powerUps = GetComponents<PowerupBase>();
+			for(int i = 0; i < powerUps.Length; ++i)
+				powerUps[i].Deactivate();
 		}
 
 		private IEnumerator DelayedResume(float timeDelay)
@@ -122,6 +128,7 @@ namespace com.tip.games.ecorunner
 		{
 			_levelManager.StopRunning();
 			mIsGameOn = false;
+			DeactivatePowerUps();
 			_gameUi.ShowEndGameScreen(StartNewGame);
 		}
 

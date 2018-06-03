@@ -12,7 +12,8 @@ namespace com.tip.games.ecorunner
 #region _IPowerup_Implementation_
 		public override void Activate()
 		{
-			mPlayer.pScoreMultiplier *= _scoreMultiplier;
+			if(!mIsActive)
+				mPlayer.pScoreMultiplier *= _scoreMultiplier;
 			base.Activate();
 		}
 		

@@ -17,7 +17,7 @@ namespace com.tip.games.ecorunner
 			
 		}
 
-		public virtual void OnActivated()
+		public virtual void OnActivated(Transform[] lanes, float spanX)
 		{
 		
 		}

@@ -7,7 +7,7 @@ namespace com.tip.games.ecorunner
 	public class ObstaclesSection : LevelSection 
 	{
 
-		public override void OnActivated()
+		public override void OnActivated(Transform[] lanes, float spanX)
 		{
 		
 		}

@@ -19,7 +19,7 @@ namespace com.tip.games.ecorunner
 		
 		public override void Deactivate()
 		{
-			mPlayer.pScoreMultiplier /= _scoreMultiplier;
+			mPlayer.pScoreMultiplier = 1;
 			base.Deactivate();
 		}
 

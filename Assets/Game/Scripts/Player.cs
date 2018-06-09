@@ -64,6 +64,7 @@ namespace com.tip.games.ecorunner
 			_gameUi.SetLives(pLives);
 			_gameUi.SetScore(mCollectablesPicked);
 			DeactivatePowerUps();
+			mScoreMultiplier = 1;
 			_levelManager.Reset();
 			_levelManager.ResumeRunning();
 		}

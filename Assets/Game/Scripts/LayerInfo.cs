@@ -11,6 +11,7 @@ namespace com.tip.games.ecorunner
 	 [System.SerializableAttribute]
 	public class LayerInfo
 	{
+
 		[SerializeField]
 		private string _layerName;
 		[SerializeField]
@@ -21,9 +22,14 @@ namespace com.tip.games.ecorunner
 
 		private List<Transform> mInactiveElements = new List<Transform>();
 		private List<Transform> mActiveElements = new List<Transform>();
+		private bool mIsSpawning = true;
+		private Transform[] mLanes;
+		private float mSpanX;
 
-		public void SetupLayer()
+		public void SetupLayer(float activeTime, Transform[] lanes, float spanX)
 		{
+			mLanes = lanes;
+			mSpanX = spanX;
 			for(int i = mActiveElements.Count - 1; i >= 0; --i)
 				RemoveElement(i);
 			mInactiveElements.Clear();
@@ -55,9 +61,19 @@ namespace com.tip.games.ecorunner
 			}
 		}
 
+		public void StartSpawning()
+		{
+			mIsSpawning = true;
+		}
+
+		public void StopSpawning()
+		{
+			mIsSpawning = false;
+		}
+
 		private void GetNextElement(float startX)
 		{
-			if(mInactiveElements.Count <= 0)
+			if(mInactiveElements.Count <= 0 || !mIsSpawning)
 				return;
 			int rnd = Random.Range(0, mInactiveElements.Count);
 			Transform outTrans = mInactiveElements[rnd];
@@ -66,7 +82,7 @@ namespace com.tip.games.ecorunner
 			outTrans.gameObject.SetActive(true);
 			LevelSection section = outTrans.GetComponent<LevelSection>();
 			if(section != null)
-				section.OnActivated();
+				section.OnActivated(mLanes, mSpanX);
 			outTrans.position = new Vector3(startX, outTrans.position.y, outTrans.position.z);
 		}
 

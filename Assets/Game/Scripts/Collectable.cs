@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using com.partho.games.utilities;
 
 namespace com.tip.games.ecorunner
 {
-	public class Collectable : PickableObject 
+	public class Collectable : PickableObject, IPoolGameObject  
 	{
 		[SerializeField]
 		private int _score = 1;
@@ -15,6 +16,7 @@ namespace com.tip.games.ecorunner
 		private Player mPullTarget;
 		private FloatObject mFloater;
 		private float mGravitateSpeed = 15;
+		private GameObjectPool mPool;
 
 		public int pScore { get { return _score; } }
 		public static ReadOnlyCollection<Collectable> pActiveCollectables 
@@ -58,9 +60,10 @@ namespace com.tip.games.ecorunner
 
 		public void Deactivate()
 		{
-			if(mActiveCollectables.Contains(this))
-				mActiveCollectables.Remove(this);
-			mPullTarget = null;
+			if(mPool != null)
+				mPool.ReleaseObject(gameObject);
+			else
+				OnDeactivated();
 		}
 
 		public void PullTowards(Player player, float speed)
@@ -78,5 +81,29 @@ namespace com.tip.games.ecorunner
 			player.OnCollected(this);
 			Deactivate();
 		}
+
+		#region __IPoolGameobject__Implementation__
+		public void OnCreated(GameObjectPool pool)
+		{
+			mPool = pool;
+		}
+
+		public void OnDestroyed()
+		{
+
+		}
+
+		public void OnActivated()
+		{
+			Activate();
+		}
+
+		public void OnDeactivated()
+		{
+			if(mActiveCollectables.Contains(this))
+				mActiveCollectables.Remove(this);
+			mPullTarget = null;
+		}
+		#endregion
 	}
 }

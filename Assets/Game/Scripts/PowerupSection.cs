@@ -16,7 +16,7 @@ namespace com.tip.games.ecorunner
 				mOriginalPositions.Add(mPowerups[i].transform.localPosition);
 		}
 
-		public override void OnActivated()
+		public override void OnActivated(Transform[] lanes, float spanX)
 		{
 			for(int i = 0; i < mPowerups.Length; ++i)
 			{

@@ -28,6 +28,7 @@ namespace com.tip.games.ecorunner
 		private int mCollectablesScore = 0;
 		private float mScoreMultiplier = 1;
 		private bool mIsGameOn = false;
+		private float mRunStartTime = 0;
 	
 		public int pLives { get { return mCurrentLives; } }
 		public float pScoreMultiplier 
@@ -46,6 +47,7 @@ namespace com.tip.games.ecorunner
 		{
 			if(!mIsGameOn)
 				return;
+			_gameUi.SetGameTime(Time.realtimeSinceStartup - mRunStartTime);
 			if(Input.GetMouseButtonDown(0) && mJumpCount < _maxJumps)
 			{
 				mCurrYVelocity = _jumpSpeed;
@@ -67,6 +69,7 @@ namespace com.tip.games.ecorunner
 			mScoreMultiplier = 1;
 			_levelManager.Reset();
 			_levelManager.ResumeRunning();
+			mRunStartTime = Time.realtimeSinceStartup;
 		}
 
 		public void OnObstacleHit(Obstacle obstacle)

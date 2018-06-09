@@ -18,6 +18,8 @@ namespace com.tip.games.ecorunner
 		private LivesUI _livesUi;
 		[SerializeField]
 		private UiScore _collectablesScore;
+		[SerializeField]
+		private Text _gameTimeText;
 
 		// Use this for initialization
 		void Start () 
@@ -53,6 +55,16 @@ namespace com.tip.games.ecorunner
 			_gameEndScreen.Show( 
 				() => onStartGame(), 
 				() => onStartGame());
+		}
+
+		public void SetGameTime(float seconds)
+		{
+			if(_gameTimeText != null)
+			{
+				int mins = (int)((int)seconds / 60);
+				int secs = (int)seconds % 60;
+				_gameTimeText.text = mins.ToString("00") + ":" + secs.ToString("00");
+			}
 		}
 
 	}

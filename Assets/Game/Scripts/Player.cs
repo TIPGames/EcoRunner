@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/* Code for player */
 namespace com.tip.games.ecorunner
 {
 	public class Player : MonoBehaviour 

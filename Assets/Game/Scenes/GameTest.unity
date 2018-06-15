@@ -576,7 +576,6 @@ MonoBehaviour:
   _levelManager: {fileID: 425897307}
   _lives: 3
   _gameUi: {fileID: 1592812148}
-  anim: {fileID: 0}
 --- !u!212 &1159489874
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -770,7 +769,7 @@ GameObject:
   - component: {fileID: 1488692830}
   - component: {fileID: 1488692832}
   m_Layer: 8
-  m_Name: PlayerGirl
+  m_Name: PlayerNinja
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -785,7 +784,7 @@ Animator:
   m_GameObject: {fileID: 1488692825}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 796462638452d6d428fdb32672c5cf4d, type: 2}
+  m_Controller: {fileID: 9100000, guid: a8a10aea96b53418c80371576c08b297, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -812,7 +811,6 @@ MonoBehaviour:
   _levelManager: {fileID: 425897307}
   _lives: 3
   _gameUi: {fileID: 1592812148}
-  anim: {fileID: 0}
 --- !u!212 &1488692828
 SpriteRenderer:
   m_ObjectHideFlags: 0

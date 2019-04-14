@@ -34,8 +34,8 @@ namespace com.tip.games.ecorunner
 		private float mCurrXVelocity;
 		private bool mIsRunning = true;
 
-		private LevelWaveInfo mCurrentWave;
-		private float mCurrentWaveTime = 0;
+		// private LevelWaveInfo mCurrentWave;
+		// private float mCurrentWaveTime = 0;
 
 		// Use this for initialization
 		void Start () 
@@ -43,7 +43,7 @@ namespace com.tip.games.ecorunner
 			mCurrXVelocity = _minRunSpeed;
 			for(int i = 0; i < _layers.Length; ++i)
 				_layers[i].SetupLayer(0, _laneCenterMarkers, _laneSpanX);
-			mCurrentWave = SelectNextWave();
+			// mCurrentWave = SelectNextWave();
 			StopRunning();
 		}
 		
@@ -66,6 +66,12 @@ namespace com.tip.games.ecorunner
 		{
 			for(int i = 0; i < _layers.Length; ++i)
 				_layers[i].SetupLayer(0, _laneCenterMarkers, _laneSpanX);
+		}
+
+		public void Pushback(float distance) 
+		{
+			for(int i = 0; i < _layers.Length; ++i)
+				_layers[i].Pushback(distance);
 		}
 
 		private void UpdateMovement()

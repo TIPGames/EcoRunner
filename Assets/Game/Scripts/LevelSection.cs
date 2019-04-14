@@ -6,6 +6,13 @@ namespace com.tip.games.ecorunner
 {
 	public class LevelSection : MonoBehaviour 
 	{
+		[SerializeField]
+		protected int _startingPlatformLevel = 1;
+		[SerializeField]
+		protected int _endingPlatformLevel = 1;
+
+		public int pStartingPlatformLevel { get { return _startingPlatformLevel; } }
+		public int pEndingPlatformLevel { get { return _endingPlatformLevel; } }
 
 		// Use this for initialization
 		public virtual void Start () {

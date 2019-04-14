@@ -5,7 +5,7 @@ using UnityEngine;
 namespace com.tip.games.ecorunner
 {
 	[RequireComponent(typeof(BoxCollider2D))]
-	public class Obstacle : MonoBehaviour 
+	public class PlatformObstacle : Obstacle 
 	{
 
 		// Use this for initialization
@@ -19,10 +19,10 @@ namespace com.tip.games.ecorunner
 			
 		}
 
-		public virtual void OnTriggerEnter2D(Collider2D c)
+		public override void OnTriggerEnter2D(Collider2D c)
 		{
 			Player player = c.GetComponent<Player>();
-			player.OnObstacleHit(this);
+			player.OnPlatformObstacleHit(this);
 		}
 	}
 }

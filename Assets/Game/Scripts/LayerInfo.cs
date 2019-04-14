@@ -61,6 +61,15 @@ namespace com.tip.games.ecorunner
 			}
 		}
 
+		public void Pushback(float distance) 
+		{
+			Vector3 pushbackVector = new Vector3(distance, 0, 0);
+			for(int i = 0; i < mActiveElements.Count; ++i)
+			{
+				mActiveElements[i].position += pushbackVector;
+			}
+		}
+
 		public void StartSpawning()
 		{
 			mIsSpawning = true;
@@ -75,10 +84,28 @@ namespace com.tip.games.ecorunner
 		{
 			if(mInactiveElements.Count <= 0 || !mIsSpawning)
 				return;
-			int rnd = Random.Range(0, mInactiveElements.Count);
-			Transform outTrans = mInactiveElements[rnd];
+
+			// Fetch relevant sections
+			int prevSectionLevel = 1;
+			if(mActiveElements.Count > 0)
+			{
+				LevelSection prevSection = mActiveElements[mActiveElements.Count - 1].GetComponent<LevelSection>();
+				if(prevSection != null)
+					prevSectionLevel = prevSection.pEndingPlatformLevel;
+			}
+			List<Transform> mSearchElements = new List<Transform>(); 
+			for(int i = 0; i < mInactiveElements.Count; ++i)
+			{
+				LevelSection sect = mInactiveElements[i].GetComponent<LevelSection>();
+				if(sect == null || sect.pStartingPlatformLevel == prevSectionLevel)
+					mSearchElements.Add(mInactiveElements[i]);
+			}
+
+			int rnd = Random.Range(0, mSearchElements.Count);
+			Transform outTrans = mSearchElements[rnd];
 			mActiveElements.Add(outTrans);
-			mInactiveElements.RemoveAt(rnd);
+			//mInactiveElements.RemoveAt(rnd);
+			mInactiveElements.Remove(outTrans);
 			outTrans.gameObject.SetActive(true);
 			LevelSection section = outTrans.GetComponent<LevelSection>();
 			if(section != null)

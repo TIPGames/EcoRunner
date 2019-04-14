@@ -7,7 +7,9 @@ namespace com.tip.games.ecorunner
 	public class Player : MonoBehaviour 
 	{
 		[SerializeField]
-		private float _groundHeight = 1;
+		private float[] _groundLevelHeights = {1, 50, 100};
+		[SerializeField]
+		private int _startingGroundLevel = 0;
 		[SerializeField]
 		private float _jumpSpeed = 4;
 		[SerializeField]
@@ -20,8 +22,20 @@ namespace com.tip.games.ecorunner
 		private int _lives = 3;
 		[SerializeField]
 		private GameUI _gameUi;
+		[SerializeField]
+		private float _obstaclePushbackDistance = 0.5f;
+		[SerializeField]
+		private float _platformPushbackDistance = 0.5f;
+		[SerializeField]
+		private Transform _startMarker;
+
+		[Header("Debug Variables")]
+		[SerializeField]
+		[Tooltip("Debug Variable. Do not set to true in final build.")]
+		private bool _godMode = false;
 
 		private float mCurrYVelocity;
+		private int mCurrGroundLevel;
 		private int mJumpCount = 0;
 		private int mCurrentLives = 0;
 		private int mCollectablesPicked = 0;
@@ -59,6 +73,7 @@ namespace com.tip.games.ecorunner
 		public void StartNewGame()
 		{
 			mIsGameOn = true;
+			mCurrGroundLevel = _startingGroundLevel;
 			mCurrentLives = _lives;
 			mCurrYVelocity = 0;
 			mCollectablesPicked = 0;
@@ -70,21 +85,30 @@ namespace com.tip.games.ecorunner
 			_levelManager.Reset();
 			_levelManager.ResumeRunning();
 			mRunStartTime = Time.realtimeSinceStartup;
+			if(_startMarker != null)
+			{
+				transform.position = _startMarker.position;
+			}
 		}
 
 		public void OnObstacleHit(Obstacle obstacle)
 		{
-			mCurrentLives--;
-			if(pLives <= 0)
-			{
-				DoGameOver();
+#if UNITY_EDITOR
+			if(_godMode)
 				return;
-			}
-			_gameUi.SetLives(pLives);
-			BlinkObject blink = GetComponent<BlinkObject>();
-			blink.StartBlink(true);
-			_levelManager.StopRunning();
-			StartCoroutine(DelayedResume(blink.pBlinkDuration));
+#endif		//.	UNITY_EDITOR
+			OnHit();
+			Pushback(_obstaclePushbackDistance);
+		}
+
+		public void OnPlatformObstacleHit(Obstacle obstacle)
+		{
+#if UNITY_EDITOR
+			if(_godMode)
+				return;			
+#endif		//.	UNITY_EDITOR
+			OnObstacleHit(obstacle);
+			Pushback(_platformPushbackDistance);
 		}
 
 		public void OnCollected(Collectable collectable)
@@ -92,6 +116,11 @@ namespace com.tip.games.ecorunner
 			mCollectablesPicked++;
 			mCollectablesScore += (int)(collectable.pScore * pScoreMultiplier);
 			_gameUi.SetScore(mCollectablesScore);
+		}
+	
+		public void OnSwitchPlatform(int newLevel) 
+		{
+			mCurrGroundLevel = newLevel;
 		}
 
 		public void ActivatePowerup<T>() where T: PowerupBase
@@ -107,6 +136,27 @@ namespace com.tip.games.ecorunner
 				powerUps[i].Deactivate();
 		}
 
+		private void OnHit() 
+		{
+			mCurrentLives--;
+			if(pLives <= 0)
+			{
+				DoGameOver();
+				return;
+			}
+			_gameUi.SetLives(pLives);
+			BlinkObject blink = GetComponent<BlinkObject>();
+			blink.StartBlink(true);
+			_levelManager.StopRunning();
+			StartCoroutine(DelayedResume(blink.pBlinkDuration));
+		}
+
+		private void Pushback(float distance) 
+		{
+			//transform.position -= new Vector3(distance, 0, 0);
+			_levelManager.Pushback(distance);
+		}
+
 		private IEnumerator DelayedResume(float timeDelay)
 		{
 			yield return new WaitForSeconds(timeDelay);
@@ -118,9 +168,9 @@ namespace com.tip.games.ecorunner
 		{
 			Vector3 pos = transform.position;
 			pos += new Vector3( 0, mCurrYVelocity * Time.deltaTime, 0 );
-			if(pos.y <= _groundHeight)
+			if(pos.y <= _groundLevelHeights[mCurrGroundLevel])
 			{
-				pos.y = _groundHeight;
+				pos.y = _groundLevelHeights[mCurrGroundLevel];
 				mCurrYVelocity = 0;
 				mJumpCount = 0;
 			}
